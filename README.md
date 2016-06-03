@@ -11,7 +11,7 @@ This token will expire in an hour, alternatively you can create or use your app 
 
 Then just do:
 ```
-python src/fb_page_chat_dowload.py <PAGE_ID> <OUTPUT_FILE> <ACCESS_TOKEN>
+python fb-page-chat-download/run.py <PAGE_ID> <OUTPUT_FILE> <ACCESS_TOKEN>
 ```
     
 Optional parameters to filter by time are added. Currently by default the last 500 conversations threads are scraped entirely.
