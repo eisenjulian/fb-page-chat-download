@@ -9,6 +9,12 @@ How to use:
 
 This token will expire in an hour, alternatively you can create or use your app and grant the app those same permitions.
 
+Dependencies: A python 3 env
+```
+pip install unidecode
+pip install requests
+```
+
 Then just do:
 ```
 python fb-page-chat-download/run.py <PAGE_ID> <OUTPUT_FILE> <ACCESS_TOKEN>
