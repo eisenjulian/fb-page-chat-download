@@ -60,7 +60,7 @@ class FBScraper:
         
     def scrape_thread_list(self, threads, count):
         for t in threads['data']:
-            extra_params = (('&since=' + self.since) if self.since else '') + (('&until=' + self.until) if self.until else '')
+            extra_params = (('&since=' + str(self.since)) if self.since else '') + (('&until=' + str(self.until)) if self.until else '')
             url = self.build_url('{}/messages?fields=from,created_time,message,shares,attachments&limit=400' + extra_params, t['id'])
             print("GET", unidecode.unidecode(t['participants']['data'][0]['name']), t['id'])
             
