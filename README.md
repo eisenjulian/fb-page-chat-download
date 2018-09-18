@@ -14,8 +14,9 @@ Dependencies: A python 3 env
 pip install unidecode
 pip install requests
 ```
+Or alternatively do `pipenv install` if you are using [pipenv](https://pipenv.readthedocs.io/en/latest/)
 
-Then just do:
+Then run it using:
 ```
 python fb-page-chat-download/run.py <PAGE_ID> <OUTPUT_FILE> <ACCESS_TOKEN>
 ```
