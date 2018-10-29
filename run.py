@@ -31,7 +31,9 @@ class FBScraper:
         self.uri = self.build_url('{}/conversations?fields=participants,link&limit=400', page)
 
     def build_url(self, endpoint, *params):
-        return "https://graph.facebook.com/v2.6/" + endpoint.format(*params) + '&access_token={}'.format(self.token)
+        buildres = "https://graph.facebook.com/v3.1/" + endpoint.format(*params) + '&access_token={}'.format(self.token)
+        print("URL: ", buildres)
+        return buildres
 
     def scrape_thread(self, url, lst):
         if self.since:
@@ -120,6 +122,13 @@ def main():
     parser.add_argument('--since', metavar='since_epoch', type=int, nargs='?', help='Filter messages from after this time')
     parser.add_argument('--until', metavar='until_epoch', type=int, nargs='?', help='Filter messages from before this time')
     args = parser.parse_args()
+
+    print("pageid: ", args.page[0])
+    print("csv: ", args.output[0])
+    print("token: ", args.token[0])
+    print("since: ", args.since)
+    print("until: ", args.until)
+    
     FBScraper(args.page[0], args.output[0], args.token[0], args.since, args.until).run()
 
 if __name__ == "__main__":
