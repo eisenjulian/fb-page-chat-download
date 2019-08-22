@@ -23,12 +23,13 @@ import concurrent.futures
 CONNECTIONS = 100
 
 class FBScraper:
-    def __init__(self, page, output, token, since=None, until=None):
+    def __init__(self, page, output, token, since=None, until=None, folder=None):
         self.token = token
         self.output = output
         self.since = since
         self.until = until
-        self.uri = self.build_url('{}/conversations?fields=participants,link&limit=400', page)
+        folder_param = ('&folder=' + folder) if folder is not None else ''
+        self.uri = self.build_url('{}/conversations?fields=participants,link&limit=400{}', page, folder_param)
 
     def build_url(self, endpoint, *params):
         buildres = "https://graph.facebook.com/v3.1/" + endpoint.format(*params) + '&access_token={}'.format(self.token)
@@ -119,6 +120,7 @@ def main():
     parser.add_argument('page', metavar='page_id', type=int, nargs=1, help='Facebook Page ID')
     parser.add_argument('output', metavar='output_file', type=str, nargs=1, help='CSV Output File')
     parser.add_argument('token', metavar='access_token', type=str, nargs=1, help='Access Token')
+    parser.add_argument('--folder', metavar='folder', type=str, nargs='?', help='Get messages in a specific folder eg: page_done')
     parser.add_argument('--since', metavar='since_epoch', type=int, nargs='?', help='Filter messages from after this time')
     parser.add_argument('--until', metavar='until_epoch', type=int, nargs='?', help='Filter messages from before this time')
     args = parser.parse_args()
@@ -129,7 +131,7 @@ def main():
     print("since: ", args.since)
     print("until: ", args.until)
     
-    FBScraper(args.page[0], args.output[0], args.token[0], args.since, args.until).run()
+    FBScraper(args.page[0], args.output[0], args.token[0], args.since, args.until, args.folder).run()
 
 if __name__ == "__main__":
     main()
